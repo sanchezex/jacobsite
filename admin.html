@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en-KE">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10120e">
+  <meta name="description" content="Manage AutoQuest vehicle listings and seller subscriptions.">
+  <title>AutoQuest — Seller &amp; admin portal</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="admin.js" defer></script>
+</head>
+<body class="admin-body">
+  <div class="topline"><span class="status-dot"></span> AUTOQUEST KENYA <span class="topline-separator">✳</span> SELLER &amp; ADMIN PORTAL</div>
+  <header class="site-header admin-header">
+    <a class="brand" href="index.html#home" aria-label="AutoQuest home"><img src="assets/autoquest-logo.jpeg" alt="AutoQuest"></a>
+    <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">☰</button>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="index.html#inventory">Buy a car</a>
+      <a href="index.html#sell">Sell your car</a>
+      <a href="index.html#signature">Signature</a>
+      <a href="index.html#services">Our services</a>
+      <a class="portal-link" href="#account">My showroom</a>
+    </nav>
+    <a class="header-cta" id="header-action" href="#account">Seller portal <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main class="admin-main page-width">
+    <section class="portal-login" id="account-login">
+      <span class="eyebrow">YOUR AUTOQUEST SHOWROOM</span>
+      <h1>Good to have<br><em>you back.</em></h1>
+      <p id="login-intro">Sign in to your showroom, or create an account to get started.</p>
+      <form id="login-form" class="portal-form">
+        <label class="form-field"><span>EMAIL</span><input name="email" type="text" inputmode="email" autocomplete="username" required maxlength="254" placeholder="you@example.com"></label>
+        <label class="form-field"><span>PASSWORD</span><input name="password" type="password" autocomplete="current-password" required maxlength="256" placeholder="Your password"></label>
+        <div class="login-actions"><button class="button button-dark" type="submit">Sign in <span aria-hidden="true">↗</span></button><button class="text-button" id="forgot-password-link" type="button">Forgot password?</button></div>
+        <span id="login-message" class="form-message" role="status" aria-live="polite"></span>
+      </form>
+      <button class="text-button" id="show-register" type="button">Create a seller account</button>
+      <form id="register-form" class="portal-form" hidden>
+        <label class="form-field"><span>YOUR NAME OR BUSINESS NAME</span><input name="name" required maxlength="100" autocomplete="name" placeholder="e.g. Mombasa Motor House"></label>
+        <label class="form-field"><span>EMAIL</span><input name="email" type="email" required maxlength="254" autocomplete="email" placeholder="you@example.com"></label>
+        <label class="form-field"><span>SELLER PLAN</span><select name="plan"><option value="basic">Basic Listing · KES 2,500 · 3 cars</option><option value="pro">Seller Pro · KES 7,500 · 15 cars</option><option value="enterprise">Enterprise · Custom · 100 cars</option></select></label>
+        <label class="form-field"><span>PASSWORD <small>At least 6 characters; a longer, unique passphrase is safer.</small></span><input name="password" type="password" autocomplete="new-password" minlength="6" required maxlength="256"></label>
+        <label class="form-field"><span>CONFIRM PASSWORD</span><input name="confirmPassword" type="password" autocomplete="new-password" minlength="6" required maxlength="256"></label>
+        <button class="button button-dark" type="submit">Create your showroom <span aria-hidden="true">↗</span></button>
+        <span id="register-message" class="form-message" role="status" aria-live="polite"></span>
+        <button class="text-button" id="show-login-from-register" type="button">Already have an account? Sign in</button>
+      </form>
+      <form id="setup-form" class="portal-form" hidden>
+        <span class="eyebrow">FIRST-TIME ADMIN SETUP</span>
+        <p>Create the AutoQuest administrator account using your own email and password. This setup is available only until the first administrator is created.</p>
+        <label class="form-field"><span>ADMIN NAME</span><input name="name" required maxlength="100" autocomplete="name" placeholder="Your name"></label>
+        <label class="form-field"><span>ADMIN EMAIL</span><input name="email" type="email" required maxlength="254" autocomplete="email" placeholder="you@example.com"></label>
+        <label class="form-field"><span>PASSWORD <small>At least 12 characters.</small></span><input name="password" type="password" autocomplete="new-password" minlength="12" required maxlength="256"></label>
+        <label class="form-field"><span>CONFIRM PASSWORD</span><input name="confirmPassword" type="password" autocomplete="new-password" minlength="12" required maxlength="256"></label>
+        <button class="button button-dark" type="submit">Create admin account <span aria-hidden="true">↗</span></button>
+        <span id="setup-message" class="form-message" role="status" aria-live="polite"></span>
+      </form>
+      <div class="credential-reveal" id="registration-result" hidden></div>
+      <p class="portal-note">New seller accounts begin pending. AutoQuest must approve the subscription and grant seller permissions before listings or contact settings can be managed.</p>
+    </section>
+
+    <section class="portal-panel" id="forgot-password" hidden>
+      <span class="eyebrow">ACCOUNT RECOVERY</span>
+      <h1>Let's get you<br><em>back in.</em></h1>
+      <p>Use the one-time recovery code you saved when your account was created or your password was last changed.</p>
+      <form id="recovery-form" class="portal-form">
+        <label class="form-field"><span>EMAIL OR SIGN-IN ID</span><input name="email" type="text" inputmode="email" autocomplete="username" required maxlength="254"></label>
+        <label class="form-field"><span>RECOVERY CODE</span><input name="recoveryCode" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" required maxlength="256"></label>
+        <label class="form-field"><span>NEW PASSWORD <small>At least 6 characters; a longer, unique passphrase is safer.</small></span><input name="newPassword" type="password" autocomplete="new-password" minlength="6" required maxlength="256"></label>
+        <label class="form-field"><span>CONFIRM NEW PASSWORD</span><input name="confirmPassword" type="password" autocomplete="new-password" minlength="6" required maxlength="256"></label>
+        <button class="button button-dark" type="submit">Reset password <span aria-hidden="true">↗</span></button>
+        <span id="recovery-message" class="form-message" role="status" aria-live="polite"></span>
+      </form>
+      <div class="credential-reveal" id="recovery-result" hidden></div>
+      <button class="text-button" id="back-to-login" type="button">← Back to sign in</button>
+    </section>
+
+    <section id="password-change" class="portal-panel password-panel" hidden>
+      <span class="eyebrow">ONE LAST THING</span>
+      <h1>Choose your<br><em>own password.</em></h1>
+      <p>For your security, change your temporary sign-in password before opening your showroom.</p>
+      <form id="password-form" class="portal-form">
+        <label class="form-field"><span>TEMPORARY PASSWORD</span><input name="currentPassword" type="password" autocomplete="current-password" required maxlength="256"></label>
+        <label class="form-field"><span>NEW PASSWORD <small>At least 6 characters; a longer, unique passphrase is safer.</small></span><input name="newPassword" type="password" autocomplete="new-password" required minlength="6" maxlength="256"></label>
+        <label class="form-field"><span>CONFIRM NEW PASSWORD</span><input name="confirmPassword" type="password" autocomplete="new-password" required minlength="6" maxlength="256"></label>
+        <button class="button button-dark" type="submit">Save new password <span aria-hidden="true">↗</span></button>
+        <span id="password-message" class="form-message" role="status" aria-live="polite"></span>
+      </form>
+    </section>
+
+    <div id="portal-content" hidden>
+      <div class="admin-title">
+        <div><span class="eyebrow" id="account-eyebrow">YOUR AUTOQUEST SHOWROOM</span><h1 id="portal-heading">Manage <em>your cars.</em></h1><p id="portal-description">Your listings, enquiries and subscription, all in one place.</p></div>
+        <div class="admin-account-actions">
+          <div class="admin-stat"><strong id="listing-count">0</strong><span>LIVE LISTINGS</span></div>
+          <button class="signout-button" id="sign-out" type="button">Sign out ↗</button>
+        </div>
+      </div>
+      <div class="admin-notice" id="account-notice" hidden><span>✳</span><p id="account-notice-text"></p></div>
+
+      <section class="admin-card plan-summary" id="tenant-plan-card" hidden>
+        <div><span class="eyebrow">YOUR SELLER SUBSCRIPTION</span><h2 id="tenant-plan-name">Seller plan</h2><p id="tenant-plan-status"></p></div>
+        <strong id="tenant-plan-price" class="plan-price"></strong>
+        <p class="billing-note">per month · subscriptions are managed by AutoQuest administrators. M-PESA/card checkout is not connected yet.</p>
+      </section>
+
+      <section class="admin-card password-settings" id="password-settings">
+        <div class="admin-card-heading"><div><span class="eyebrow">KEEP YOUR ACCOUNT SECURE</span><h2>Change password</h2><p>Password changes also replace your one-time recovery code.</p></div></div>
+        <form id="account-password-form" class="portal-form password-settings-form">
+          <label class="form-field"><span>CURRENT PASSWORD</span><input name="currentPassword" type="password" autocomplete="current-password" required maxlength="256"></label>
+          <label class="form-field"><span>NEW PASSWORD <small>At least 6 characters; a longer, unique passphrase is safer.</small></span><input name="newPassword" type="password" autocomplete="new-password" required minlength="6" maxlength="256"></label>
+          <label class="form-field"><span>CONFIRM NEW PASSWORD</span><input name="confirmPassword" type="password" autocomplete="new-password" required minlength="6" maxlength="256"></label>
+          <button class="button button-dark" type="submit">Change password <span aria-hidden="true">↗</span></button>
+          <span id="account-password-message" class="form-message" role="status" aria-live="polite"></span>
+        </form>
+      </section>
+
+      <section class="admin-card" id="listing-form-section">
+        <div class="admin-card-heading"><div><span class="eyebrow">ADD TO THE SHOWROOM</span><h2>Create a listing</h2></div><span class="admin-step">01 / DETAILS</span></div>
+        <form id="listing-form">
+          <div class="form-grid">
+            <label class="form-field field-wide"><span>CAR TITLE <b>*</b></span><input name="title" required maxlength="80" placeholder="e.g. Toyota Land Cruiser Prado TX"></label>
+            <label class="form-field"><span>MAKE <b>*</b></span><input name="make" required maxlength="40" placeholder="Toyota"></label>
+            <label class="form-field"><span>MODEL <b>*</b></span><input name="model" required maxlength="40" placeholder="Land Cruiser Prado"></label>
+            <label class="form-field"><span>YEAR <b>*</b></span><input name="year" type="number" required min="1950" max="2035" placeholder="2021"></label>
+            <label class="form-field"><span>PRICE (KES) <b>*</b></span><input name="price" type="number" required min="1000" step="1000" placeholder="4850000"></label>
+            <label class="form-field"><span>LOCATION <b>*</b></span><input name="location" required maxlength="60" placeholder="e.g. Kilimani, Nairobi"></label>
+            <label class="form-field"><span>MILEAGE (KM) <b>*</b></span><input name="mileage" type="number" required min="0" step="1000" placeholder="42000"></label>
+            <label class="form-field"><span>BODY TYPE</span><select name="bodyType"><option value="suv">SUV / 4x4</option><option value="sedan">Sedan</option><option value="hatchback">Hatchback</option><option value="wagon">Wagon</option><option value="pickup">Pickup</option><option value="van">Van</option><option value="coupe">Coupe</option></select></label>
+            <label class="form-field"><span>TRANSMISSION</span><select name="transmission"><option>Automatic</option><option>Manual</option></select></label>
+            <label class="form-field"><span>FUEL</span><select name="fuel"><option>Petrol</option><option>Diesel</option><option>Hybrid</option><option>Electric</option></select></label>
+            <label class="form-field"><span>ENGINE</span><input name="engine" maxlength="30" placeholder="2.8L"></label>
+            <label class="form-field"><span>COLOUR</span><input name="colour" maxlength="30" placeholder="Pearl white"></label>
+            <label class="form-field field-wide"><span>DESCRIPTION</span><textarea name="description" rows="3" maxlength="500" placeholder="Share the details buyers will want to know."></textarea></label>
+            <label class="form-field field-wide upload-field"><span>CAR PHOTOS <b>*</b> <small>Up to 6 photos. JPG, PNG or WebP. The cover image appears first.</small></span><input id="photo-input" name="photos" type="file" accept="image/jpeg,image/png,image/webp" multiple required><span class="upload-hint">＋ &nbsp; Choose photos from your device</span><div id="photo-previews" class="photo-previews"></div></label>
+            <label class="form-check field-wide" id="featured-field" hidden><input name="featured" type="checkbox"><span>Feature this listing in the main car collection</span></label>
+          </div>
+          <div class="form-actions"><button class="button button-gold" id="save-listing" type="submit">Publish listing <span aria-hidden="true">↗</span></button><span id="form-message" class="form-message" role="status" aria-live="polite"></span></div>
+        </form>
+      </section>
+      <section class="admin-card listings-management" id="listing-management-section">
+        <div class="admin-card-heading"><div><span class="eyebrow">YOUR INVENTORY</span><h2>Current listings</h2></div><a class="text-link" href="index.html#inventory">View marketplace ↗</a></div>
+        <div class="manage-list" id="manage-list" aria-live="polite"></div>
+      </section>
+
+      <section class="admin-card contact-settings" id="contact-card">
+        <div class="admin-card-heading"><div><span class="eyebrow">MAKE IT EASY TO REACH YOU</span><h2>Seller contact</h2><p>Set your WhatsApp number so buyers can ask about your vehicles.</p></div></div>
+        <form id="contact-form" class="contact-form"><label class="form-field"><span>WHATSAPP NUMBER <small>Include your country code, e.g. +254 7XX XXX XXX</small></span><input name="whatsapp" type="tel" inputmode="tel" maxlength="25" placeholder="+254 7XX XXX XXX"></label><button class="button button-dark" type="submit">Save contact <span aria-hidden="true">↗</span></button><span id="contact-message" class="form-message" role="status" aria-live="polite"></span></form>
+      </section>
+
+      <section class="admin-card tenant-management" id="tenant-management" hidden>
+        <div class="admin-card-heading"><div><span class="eyebrow">SELLER ACCOUNTS &amp; MONTHLY PLANS</span><h2>Manage tenants</h2><p>Create seller accounts and approve subscription access.</p></div></div>
+        <form id="tenant-form" class="tenant-form">
+          <label class="form-field"><span>SELLER / BUSINESS NAME <b>*</b></span><input name="name" required maxlength="100" placeholder="e.g. Mombasa Motor House"></label>
+          <label class="form-field"><span>SELLER EMAIL <b>*</b></span><input name="email" type="email" required maxlength="254" placeholder="seller@example.com"></label>
+          <label class="form-field"><span>MONTHLY SUBSCRIPTION <b>*</b></span><select name="plan"><option value="basic">Basic Listing · KES 2,500 · 3 cars</option><option value="pro">Seller Pro · KES 7,500 · 15 cars</option><option value="enterprise">Enterprise · Custom · 100 cars</option></select></label>
+          <fieldset class="tenant-permission-fields">
+            <legend>SELLER PERMISSIONS</legend>
+            <label class="form-check"><input name="can_create_listings" type="checkbox"><span>Create listings</span></label>
+            <label class="form-check"><input name="can_manage_listings" type="checkbox"><span>Mark sold and remove own listings</span></label>
+            <label class="form-check"><input name="can_manage_contact" type="checkbox"><span>Update own WhatsApp contact</span></label>
+          </fieldset>
+          <button class="button button-dark" type="submit">Create seller account <span aria-hidden="true">＋</span></button>
+          <span id="tenant-message" class="form-message" role="status" aria-live="polite"></span>
+        </form>
+        <div class="credential-reveal" id="credential-reveal" hidden></div>
+        <div class="tenant-list" id="tenant-list" aria-live="polite"></div>
+        <p class="billing-note">Plans and monthly rates are indicative from the business blueprint. M-PESA and card payments have not been connected; approve or pause subscriptions manually until a payment provider is integrated.</p>
+      </section>
+    </div>
+    <div class="credential-reveal recovery-reveal" id="recovery-reveal" hidden></div>
+  </main>
+
+  <footer class="site-footer admin-footer"><div class="page-width footer-bottom"><span>© <span class="current-year"></span> AUTOQUEST KENYA</span><span>THE NEXT CHAPTER IS YOURS.</span><a href="index.html">MARKETPLACE ↗</a></div></footer>
+  <script src="nav.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+.venv/
+data/
+.env*
+.vercel/
+__pycache__/
+*.py[cod]
+server.py
+test_server.py
+.vscode/
